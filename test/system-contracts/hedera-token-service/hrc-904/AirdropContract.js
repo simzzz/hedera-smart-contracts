@@ -299,7 +299,7 @@ describe('AirdropContract Test Suite', function () {
         gasLimit: 2_000_000,
       }
     );
-    const responseCode = await utils.getPrecompileResponseCode(tx.hash);
+    const responseCode = await utils.getHTSResponseCode(tx.hash);
     expect(responseCode).to.eq('178'); // INSUFFICIENT_TOKEN_BALANCE code
   });
 
@@ -319,7 +319,7 @@ describe('AirdropContract Test Suite', function () {
         gasLimit: 2_000_000,
       }
     );
-    const responseCode = await utils.getPrecompileResponseCode(txNFT.hash);
+    const responseCode = await utils.getHTSResponseCode(txNFT.hash);
     expect(responseCode).to.eq('15'); // INVALID_ACCOUNT_ID code
   });
 
@@ -335,7 +335,7 @@ describe('AirdropContract Test Suite', function () {
         gasLimit: 2_000_000,
       }
     );
-    const responseCode = await utils.getPrecompileResponseCode(txNFT.hash);
+    const responseCode = await utils.getHTSResponseCode(txNFT.hash);
     expect(responseCode).to.eq('167'); // INVALID_TOKEN_ID code
   });
 
@@ -352,7 +352,7 @@ describe('AirdropContract Test Suite', function () {
         gasLimit: 2_000_000,
       }
     );
-    const responseCode = await utils.getPrecompileResponseCode(tx.hash);
+    const responseCode = await utils.getHTSResponseCode(tx.hash);
     expect(responseCode).to.eq('50'); // INVALID_TRANSACTION_BODY code
   });
 
