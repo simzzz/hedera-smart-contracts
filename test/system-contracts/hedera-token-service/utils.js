@@ -966,7 +966,7 @@ class Utils {
     }
   }
 
-  static async getPrecompileResponseCode(txHash) {
+  static async getHTSResponseCode(txHash) {
     const network = hre.network.name;
     const mirrorNodeUrl = getMirrorNodeUrl(network);
     const res = await axios.get(
@@ -974,6 +974,18 @@ class Utils {
     );
     const precompileAction = res.data.actions.find(
       (x) => x.recipient === Constants.HTS_SYSTEM_CONTRACT_ADDRESS
+    );
+    return BigInt(precompileAction.result_data).toString();
+  }
+
+  static async getHASResponseCode(txHash) {
+    const network = hre.network.name;
+    const mirrorNodeUrl = getMirrorNodeUrl(network);
+    const res = await axios.get(
+      `${mirrorNodeUrl}/contracts/results/${txHash}/actions`
+    );
+    const precompileAction = res.data.actions.find(
+      (x) => x.recipient === Constants.HAS_SYSTEM_CONTRACT_ADDRESS
     );
     return BigInt(precompileAction.result_data).toString();
   }
