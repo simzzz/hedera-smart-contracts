@@ -105,7 +105,6 @@ const Contract = {
   ERC20CappedMock: 'ERC20CappedMock',
   ERC20PausableMock: 'ERC20PausableMock',
   HRC719Contract: 'HRC719Contract',
-  HRC904Contract: 'HRC904Contract',
   ExchangeRateMock: 'ExchangeRateMock',
   PrngSystemContract: 'PrngSystemContract',
   Concatenation: 'Concatenation',

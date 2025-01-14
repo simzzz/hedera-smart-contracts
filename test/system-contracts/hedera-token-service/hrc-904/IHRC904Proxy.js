@@ -4,8 +4,7 @@ const utils = require('../utils');
 const Constants = require('../../../constants');
 const { Contract } = require('ethers');
 
-describe('HRC-904 HRC904Contract Test Suite', function () {
-  let hrc904Contract;
+describe('HRC-904 IHRC904 Proxy Methods Test Suite', function () {
   let airdropContract;
   let tokenAddress;
   let nftTokenAddress;
@@ -56,9 +55,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
     tokenCreateContract = await utils.deployContract(
       Constants.Contract.TokenCreateContract
     );
-    hrc904Contract = await utils.deployContract(
-      Constants.Contract.HRC904Contract
-    );
     owner = signers[0].address;
     receiver = new ethers.Wallet(
       ethers.hexlify(ethers.randomBytes(32))
@@ -77,7 +73,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
     await utils.updateAccountKeysViaHapi([
       await airdropContract.getAddress(),
       await tokenCreateContract.getAddress(),
-      await hrc904Contract.getAddress(),
     ]);
 
     tokenAddress =
@@ -92,7 +87,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
       [
         await airdropContract.getAddress(),
         await tokenCreateContract.getAddress(),
-        await hrc904Contract.getAddress(),
       ],
       true,
       true,
@@ -113,7 +107,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
     contractAddresses = [
       await airdropContract.getAddress(),
       await tokenCreateContract.getAddress(),
-      await hrc904Contract.getAddress(),
     ];
 
     nftTokenAddress = await setupNft();
@@ -169,15 +162,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
 
   // Positive tests
   it('should cancel a pending airdrop for a fungible token (FT)', async function () {
-    const disableAutoAssociations =
-      await walletIHRC904AccountFacade.setUnlimitedAutomaticAssociations(
-        false,
-        {
-          gasLimit: 2_000_000,
-        }
-      );
-    await disableAutoAssociations.wait();
-
     const airdrop = await airdropContract.tokenAirdrop(
       tokenAddress,
       owner,
@@ -247,14 +231,6 @@ describe('HRC-904 HRC904Contract Test Suite', function () {
   });
 
   it('should claim a pending airdrop for a fungible token (FT)', async function () {
-    const disableAutoAssociations =
-      await walletIHRC904AccountFacade.setUnlimitedAutomaticAssociations(
-        false,
-        {
-          gasLimit: 2_000_000,
-        }
-      );
-    await disableAutoAssociations.wait();
     const airdrop = await airdropContract.tokenAirdrop(
       tokenAddress,
       owner,

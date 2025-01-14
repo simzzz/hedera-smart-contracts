@@ -212,7 +212,8 @@ describe('HRC-904 AirdropContract Test Suite', function () {
     expect(nftOwner).to.equal(receiver);
   });
 
-  it.only('should airdrop non-fungible tokens (NFT) to multiple accounts', async function () {
+  it('should airdrop non-fungible tokens (NFT) to multiple accounts', async function () {
+    const nftTokenAddress = await setupNft();
     const serials = [];
     serials.push(
       await utils.mintNFTToAddress(tokenCreateContract, nftTokenAddress)
