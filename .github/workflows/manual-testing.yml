@@ -134,6 +134,15 @@ jobs:
       mirrorTag: ${{inputs.mirrorNodeTag}}
       relayTag: ${{inputs.relayTag}}
 
+  HIP904:
+    name: HIP904 Test Suite
+    uses: ./.github/workflows/test-workflow.yml
+    with:
+      testfilter: HRC-904
+      networkTag: ${{inputs.networkNodeTag}}
+      mirrorTag: ${{inputs.mirrorNodeTag}}
+      relayTag: ${{inputs.relayTag}}
+
   ShanghaiOpcodes:
     name: ShanghaiOpcodes Test Suite
     uses: ./.github/workflows/test-workflow.yml

@@ -4,7 +4,7 @@ const utils = require('../utils');
 const Constants = require('../../../constants');
 const { Contract } = require('ethers');
 
-describe('HRC904Contract Test Suite', function () {
+describe('HRC-904 HRC904Contract Test Suite', function () {
   let hrc904Contract;
   let airdropContract;
   let tokenAddress;
@@ -52,9 +52,13 @@ describe('HRC904Contract Test Suite', function () {
 
   before(async function () {
     signers = await ethers.getSigners();
-    airdropContract = await utils.deployAirdropContract();
-    tokenCreateContract = await utils.deployTokenCreateContract();
-    hrc904Contract = await utils.deployHRC904Contract();
+    airdropContract = await utils.deployContract(Constants.Contract.Airdrop);
+    tokenCreateContract = await utils.deployContract(
+      Constants.Contract.TokenCreateContract
+    );
+    hrc904Contract = await utils.deployContract(
+      Constants.Contract.HRC904Contract
+    );
     owner = signers[0].address;
     receiver = new ethers.Wallet(
       ethers.hexlify(ethers.randomBytes(32))
